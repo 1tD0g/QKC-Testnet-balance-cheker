@@ -1,0 +1,17 @@
+{
+  "name": "qkcbot",
+  "version": "1.0.0",
+  "description": "Get tQKC by command /bal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "1tD0g",
+  "license": "ISC",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.30.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
