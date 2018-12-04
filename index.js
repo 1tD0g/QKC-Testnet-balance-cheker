@@ -34,8 +34,28 @@ function getBalance(targetAddr, id){
 
 telegram.onText(/\/bal (.+)/, async (msg, match) => {
     console.log(`${msg.from.id}:${msg.from.username} >> ${match[1]}`)
+    let address = match[1];
+    if(!address.startsWith("0x")){
+        address = "0x" + address
+    }
+
+    if(address.length < 50){
+        let toAdd = 50 - address.length;
+        for(var i = 0 ; i < toAdd; i++) {
+            address += "0"
+        }
+    }
+
+    if(address.length > 50){
+        telegram.sendMessage(msg.chat.id, `<b>ERROR</b>: Address too long`, {
+            parse_mode: "HTML",
+            reply_to_message_id: msg.message_id
+        })
+        return
+    }
+
     try{
-        const result = await getBalance(match[1], 0);
+        const result = await getBalance(address, 0);
         if(result == null) {
             telegram.sendMessage(msg.chat.id, `<b>ERROR</b>: Result is null`, {
                 parse_mode: "HTML",
